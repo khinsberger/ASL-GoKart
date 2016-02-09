@@ -77,6 +77,7 @@ int Ventilator_vel;
  * Initialisieren der globalen Parameter
  */
 const int R2 = 10000;
+const double sollTemp = 21;
 
 
 
@@ -131,6 +132,7 @@ void setup() {
       break;
     }
   }
+  Serial.println("System bereit, Start der Regelung");
 }
 
 void loop() {  //Durchflusskontrolle und Kompensierung
@@ -156,17 +158,21 @@ void loop() {  //Durchflusskontrolle und Kompensierung
   }
 
         Serial.print("Durchfluss: ");
-        Serial.println(durchfluss);
+        Serial.print(durchfluss);
+        Serial.println("l/min");
 
         Serial.print("Temperatur: ");
-        Serial.println(temperatur);
+        Serial.print(temperatur);
+        Serial.println("deg C");
 
   
   getTemperatur();
-  double diff = temperatur - 70.0;
+  double diff = temperatur - sollTemp;
   double reg = diff / 5.0;
   Ventilator_vel = Ventilator_vel * ( 1 + reg);
-  setWasserpumpe(Ventilator_vel);
+  Serial.print("Ventilator: ");
+  Serial.println(Ventilator_vel);
+  setVentilator(Ventilator_vel);
   if(temperatur > 75) {
     setVentile(1, 0);            //alle Ventile aus
     setVentile(2, 0);
