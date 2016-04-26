@@ -1,5 +1,5 @@
 /*
- * Miniprojekt 2: LED blinken lassen
+ * Miniprojekt 4: Variablen
  */
 
 void setup() {

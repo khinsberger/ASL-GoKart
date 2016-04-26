@@ -1,12 +1,11 @@
 /*
-*
-* Mini-Projekt 1: Blinken einer LED
-*
+* Mini-Projekt 2: Blinken einer LED
+* Loesung
 */
 
 void setup() {
   //Pin Deklaration
-  pinMode(11, OUTPUT);
+  pinMode(13, OUTPUT);
 }
 
 void loop() {
