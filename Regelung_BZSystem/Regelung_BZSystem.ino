@@ -69,7 +69,7 @@ int Ventilator_vel = 100;
  * Initialisieren der globalen Parameter
  */
 const int R2 = 10000;
-const double sollTemp = 28.8;
+const double sollTemp = 50;
 
 
 
@@ -152,20 +152,31 @@ void loop() {  //Durchflusskontrolle und Kompensierung
 
         Serial.print("Durchfluss: ");
         Serial.print(durchfluss);
-        Serial.println("l/min");
+        Serial.print("l/min    ");
 
         Serial.print("Temperatur: ");
         Serial.print(temperatur);
-        Serial.println("deg C");
+        Serial.print("deg C    ");
 
   
   getTemperatur();
+  /*if (temperatur >= 26) {
+    while(temperatur >= 25) {
+      Ventilator_vel = 255;
+      setVentilator(Ventilator_vel);
+      Serial.println("Ventilator: ");
+      Serial.println(Ventilator_vel);
+      getTemperatur();
+      delay(500);
+    }
+  }*/
   double diff = temperatur - sollTemp;
-  double reg = diff / 0.5;
+  double reg = diff / 3;
   Ventilator_vel = Ventilator_vel * ( 1 + reg);
   Ventilator_vel = constrain(Ventilator_vel,100,255);
   Serial.print("Ventilator: ");
-  Serial.println(Ventilator_vel);
+  Serial.print((double) Ventilator_vel/255.0*100.0);
+  Serial.println("%");
   setVentilator(Ventilator_vel);
   if(temperatur > 30) {
     setVentile(1, 0);            //alle Ventile aus
