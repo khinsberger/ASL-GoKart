@@ -22,9 +22,9 @@
  * Pin 8: Wasserpumpe
  * 
  * -- User Interface --
- * Pin 30: Warnleuchte Temperatur zu hoch (TH)
- * Pin 31: Warnleuchte Temperatur zu niedrig (TN)
- * Pin 32: Warnleuchte kein Durchfluss (D)
+ * Pin 7: Warnleuchte Temperatur zu hoch (TH)
+ * Pin 6: Warnleuchte Temperatur zu niedrig (TN)
+ * Pin 5: Warnleuchte kein Durchfluss (D)
  * 
  */
 
@@ -52,9 +52,9 @@ const int ventilatorPin         = 3;
 const int kompressorPin         = 4;
 const int wasserpumpePin        = 8;
 // User Interface
-const int warnleuchtenPin_TH    = 30;
-const int warnleuchtenPin_TN    = 31;
-const int warnleuchtenPin_D     = 32;
+const int warnleuchtenPin_TH    = 7;
+const int warnleuchtenPin_TN    = 6;
+const int warnleuchtenPin_D     = 5;
 
 
 /*
@@ -69,7 +69,7 @@ int Ventilator_vel = 100;
  * Initialisieren der globalen Parameter
  */
 const int R2 = 10000;
-const double sollTemp = 50;
+const double sollTemp = 25.15;
 
 
 
@@ -148,6 +148,9 @@ void loop() {  //Durchflusskontrolle und Kompensierung
     }
   } else {
     setWarnleuchten(3,0);
+    setVentile(1, 1);               //alle Ventile aus
+    setVentile(2, 1);
+    setVentile(3, 1);
   }
 
         Serial.print("Durchfluss: ");
@@ -178,16 +181,16 @@ void loop() {  //Durchflusskontrolle und Kompensierung
   Serial.print((double) Ventilator_vel/255.0*100.0);
   Serial.println("%");
   setVentilator(Ventilator_vel);
-  if(temperatur > 30) {
-    setVentile(1, 0);            //alle Ventile aus
-    setVentile(2, 0);
-    setVentile(3, 0);
+  if(temperatur > 28) {
+    //setVentile(1, 0);            //alle Ventile aus
+    //setVentile(2, 0);
+    //setVentile(3, 0);
     setKompressor(0);            //Pumpen aus außer Wasserpumpe
-    setWarnleuchten(2,1);
-    setWarnleuchten(1,0);
-  } else if (temperatur < 29) {
     setWarnleuchten(1,1);
     setWarnleuchten(2,0);
+  } else if (temperatur < 23) {
+    setWarnleuchten(2,1);
+    setWarnleuchten(1,0);
   } else {
     setWarnleuchten(1,0);
     setWarnleuchten(2,0);
