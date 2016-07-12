@@ -1,7 +1,7 @@
 
 int druckSensorPin = A0;           //the pin that the Sensor is attached to
 int druckSensor = 0;              // der Druck am Kompressorausgang
-int druckLeitung = 1000  // der gewünschte Druck in kP nach dem Kompressor (O2 Leitung zur Brennstoffzelle)
+int druckLeitung = 1000;  // der gewünschte Druck in kP nach dem Kompressor (O2 Leitung zur Brennstoffzelle)
 int maxDruck = 1200;     //bei diesem Wert wird der Kompressor komplett abgeschalten
 int minDruck = 800;      // bei diesem Wert wird Kompressor auf maximale Leistung geschalten
 //max und min sind Masnahmen, damit der Kompressor nicht immer an und aus geht bei jeder kleinsten veränderung
@@ -18,7 +18,7 @@ void setup()
   //aufbauen des gewünschten Startdrucks vor Systemstart
   while(analogRead(druckSensorPin) < druckLeitung)
   {
-   kompressorWert = 255
+   kompressorWert = 255;
   }
   Serial.begin(9600);
 }
@@ -27,9 +27,10 @@ void setup()
 void loop()
     {
       druckSensor = analogRead(druckSensorPin);
-      Serial.prinln("Druck in Leitung: Kompressor OUT: " druckSensor);
+      Serial.println("Druck in Leitung: Kompressor OUT: ");
+      Serial.print(druckSensor);
       
-      mosfetWeert = map(KompressorWert, 20, 255,0,255); // kompWert <20 kann nicht umgesetz werden
+      mosfetWert = map(kompressorWert, 35, 173,0,255); //173< kompWert <35 kann nicht umgesetz werden
        // Wert wird an den Mosfet gegeben
        analogWrite(mosfetPinKompressor, mosfetWert);
        
@@ -37,20 +38,20 @@ void loop()
        //Falls der Druck zu niedrig, Kompressor Wert hoch
         if ( analogRead(druckSensorPin) < druckLeitung)
         {
-         kompressorWert++ 
+         kompressorWert++; 
            }
        //Falls der Druck zu hoch, Kompressor Wert runter
         if ( analogRead(druckSensorPin) > druckLeitung)
         {
-         kompressorWert--
+         kompressorWert--;
            }
         if(analogRead(druckSensorPin) > maxDruck)
         {
-         mosfetWert = 0
+         mosfetWert = 0;
            }
         if(analogRead(druckSensorPin) < minDruck)
         {
-          mosfetWert = 255
+          mosfetWert = 255;
            }
       
        delay(10);
