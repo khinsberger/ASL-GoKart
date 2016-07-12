@@ -5898,6 +5898,12 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <part name="D1" library="diode" deviceset="1N581*" device="" technology="7-B"/>
 <part name="D2" library="diode" deviceset="1N581*" device="" technology="7-B"/>
 <part name="D3" library="diode" deviceset="1N581*" device="" technology="7-B"/>
+<part name="Q2" library="transistor-fet" deviceset="BUZ11" device="" value="Mosfet"/>
+<part name="R6" library="SparkFun-Passives" deviceset="RESISTOR" device="AXIAL-0.3" value="1k"/>
+<part name="GND7" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
+<part name="R7" library="SparkFun-Passives" deviceset="RESISTOR" device="AXIAL-0.3" value="10k"/>
+<part name="KOMPRESSOR" library="SparkFun-Passives" deviceset="RESISTOR" device="AXIAL-0.3" value="170Ohm"/>
+<part name="SUPPLY7" library="SparkFun-Aesthetics" deviceset="12V" device="" value="5V"/>
 </parts>
 <sheets>
 <sheet>
@@ -5954,6 +5960,12 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <instance part="D1" gate="G$1" x="17.78" y="63.5" rot="R90"/>
 <instance part="D2" gate="G$1" x="17.78" y="40.64" rot="R90"/>
 <instance part="D3" gate="G$1" x="17.78" y="20.32" rot="R90"/>
+<instance part="Q2" gate="G$1" x="256.54" y="76.2"/>
+<instance part="R6" gate="G$1" x="243.84" y="73.66" rot="R180"/>
+<instance part="GND7" gate="1" x="261.62" y="66.04"/>
+<instance part="R7" gate="G$1" x="254" y="71.12" rot="R180"/>
+<instance part="KOMPRESSOR" gate="G$1" x="261.62" y="96.52" rot="R270"/>
+<instance part="SUPPLY7" gate="G$1" x="261.62" y="114.3"/>
 </instances>
 <busses>
 </busses>
@@ -6014,6 +6026,15 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <wire x1="60.96" y1="35.56" x2="60.96" y2="40.64" width="0.1524" layer="91"/>
 <junction x="60.96" y="35.56"/>
 </segment>
+<segment>
+<pinref part="Q2" gate="G$1" pin="S"/>
+<wire x1="261.62" y1="73.66" x2="261.62" y2="71.12" width="0.1524" layer="91"/>
+<pinref part="GND7" gate="1" pin="GND"/>
+<pinref part="R7" gate="G$1" pin="1"/>
+<wire x1="261.62" y1="71.12" x2="261.62" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="259.08" y1="71.12" x2="261.62" y2="71.12" width="0.1524" layer="91"/>
+<junction x="261.62" y="71.12"/>
+</segment>
 </net>
 <net name="A0" class="0">
 <segment>
@@ -6064,7 +6085,7 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <label x="17.78" y="99.06" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="N$1" class="0">
+<net name="KOMPRESSOR" class="0">
 <segment>
 <wire x1="35.56" y1="177.8" x2="35.56" y2="121.92" width="0.1524" layer="91"/>
 <wire x1="35.56" y1="121.92" x2="139.7" y2="121.92" width="0.1524" layer="91"/>
@@ -6077,9 +6098,10 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <wire x1="223.52" y1="124.46" x2="223.52" y2="177.8" width="0.1524" layer="91"/>
 <wire x1="223.52" y1="124.46" x2="274.32" y2="124.46" width="0.1524" layer="91"/>
 <wire x1="139.7" y1="76.2" x2="76.2" y2="76.2" width="0.1524" layer="91"/>
-<wire x1="73.66" y1="76.2" x2="0" y2="76.2" width="0.1524" layer="91"/>
-<wire x1="73.66" y1="76.2" x2="76.2" y2="76.2" width="0.1524" layer="91"/>
+<wire x1="76.2" y1="76.2" x2="0" y2="76.2" width="0.1524" layer="91"/>
 <wire x1="76.2" y1="76.2" x2="76.2" y2="0" width="0.1524" layer="91"/>
+<wire x1="223.52" y1="60.96" x2="274.32" y2="60.96" width="0.1524" layer="91"/>
+<label x="259.08" y="60.96" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="IN1" class="0">
@@ -6306,11 +6328,6 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <wire x1="162.56" y1="106.68" x2="147.32" y2="106.68" width="0.1524" layer="91"/>
 <label x="147.32" y="106.68" size="1.778" layer="95"/>
 </segment>
-<segment>
-<pinref part="R4" gate="G$1" pin="2"/>
-<wire x1="45.72" y1="66.04" x2="45.72" y2="68.58" width="0.1524" layer="91"/>
-<label x="45.72" y="68.58" size="1.778" layer="95"/>
-</segment>
 </net>
 <net name="N$5" class="0">
 <segment>
@@ -6382,6 +6399,49 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <junction x="17.78" y="68.58"/>
 <junction x="17.78" y="45.72"/>
 <junction x="17.78" y="25.4"/>
+</segment>
+</net>
+<net name="N$1" class="0">
+<segment>
+<pinref part="R6" gate="G$1" pin="1"/>
+<pinref part="Q2" gate="G$1" pin="G"/>
+<wire x1="248.92" y1="73.66" x2="251.46" y2="73.66" width="0.1524" layer="91"/>
+<pinref part="R7" gate="G$1" pin="2"/>
+<wire x1="248.92" y1="71.12" x2="248.92" y2="73.66" width="0.1524" layer="91"/>
+<junction x="248.92" y="73.66"/>
+</segment>
+</net>
+<net name="N$4" class="0">
+<segment>
+<pinref part="Q2" gate="G$1" pin="D"/>
+<wire x1="261.62" y1="78.74" x2="261.62" y2="91.44" width="0.1524" layer="91"/>
+<pinref part="KOMPRESSOR" gate="G$1" pin="2"/>
+</segment>
+</net>
+<net name="N$6" class="0">
+<segment>
+<pinref part="R6" gate="G$1" pin="2"/>
+<wire x1="238.76" y1="73.66" x2="233.68" y2="73.66" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="4" class="0">
+<segment>
+<pinref part="R4" gate="G$1" pin="2"/>
+<wire x1="45.72" y1="66.04" x2="45.72" y2="68.58" width="0.1524" layer="91"/>
+<label x="45.72" y="68.58" size="1.778" layer="95"/>
+<label x="233.68" y="73.66" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U1" gate="G$1" pin="4"/>
+<wire x1="162.56" y1="104.14" x2="147.32" y2="104.14" width="0.1524" layer="91"/>
+<label x="147.32" y="104.14" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="N$7" class="0">
+<segment>
+<pinref part="KOMPRESSOR" gate="G$1" pin="1"/>
+<wire x1="261.62" y1="101.6" x2="261.62" y2="114.3" width="0.1524" layer="91"/>
+<pinref part="SUPPLY7" gate="G$1" pin="12V"/>
 </segment>
 </net>
 </nets>
